@@ -1,0 +1,87 @@
+﻿.zx-top {
+    position:relative;
+    height:150px;
+    width:1200px;
+    margin: 0 auto;
+}
+
+.zx-top .zx-top-logo {
+    float: left;
+    margin-top:50px;
+}
+
+.zx-top .zx-top-logo img{ 
+    width: 100px;
+    height: 60px;
+    display:block;
+}
+
+
+.zx-top .zx-top-menu {
+    float:right;
+    margin-top:80px;
+}
+
+.zx-top .zx-top-menu ul{
+    list-style:none;
+}
+
+.zx-top .zx-top-menu ul li{
+    float:left;
+}
+
+.zx-top .zx-top-menu ul li a {
+    color:#231815;
+    font-size:15px;
+    margin-right:50px;
+    text-decoration:none;
+    word-spacing:8px; letter-spacing: 1px;
+} 
+
+.zx-top .zx-top-menu ul li a:hover {
+    color:#fff;
+} 
+
+.zx-top .zx-top-menu ul li a.active {
+    color:#fff; 
+}
+
+.zx-body { 
+}
+
+.zx-design {
+  position: relative;
+  height: 150px;
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.zx-design ul {
+  width: 297px;
+  float: left;
+  margin-top: 8px;
+  display: inline;
+  text-decoration:none;
+}
+
+.zx-design ul li {
+  background-color: #FFF;
+  width: 297px;
+  float: left;
+  margin-bottom: 4px;
+  display: inline;
+  position: relative; 
+}
+
+.design_menu {
+    position: absolute;
+    width: 300px;
+    padding-top:10px;
+    margin-left: -100px;
+    color: #231815;
+}
+
+.design_menu a {
+    font-size: 12px !important;
+    margin-right: 20px !important;
+}

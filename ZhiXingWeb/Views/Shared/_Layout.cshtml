@@ -5,12 +5,53 @@
     <meta name="viewport" content="width=device-width" />
     <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/modernizr")   
 </head>
 <body>
-    @RenderBody()
+    <div class="zx-top">
+        <div class="zx-top-logo">
+            <a href="index.php">
+                <img src="~/Image/logo.png" alt="知行创意" /> 
+            </a>
+            
+        </div>
+        <div class="zx-top-menu">
+            <ul>
+                <li>
+                    <a href="/home/index">
+                        首页
+                    </a>
+                </li>
+                <li>    
+                    <a href="/home/service">
+                        知行服务
+                    </a>
+                </li>
+                <li data-bind="event:{ mouseover:showSubMenu,mouseout: hideSubMenu }">
+                    <a href="/home/design" class="zx-top-menu-design">
+                        知行作品
+                    </a>
+                    <div class="design_menu" id="design_menu" style="display:none;" data-bind="visible:subMenuVisible,foreach:subMenuArray">
+                        <a data-bind="attr:{ href: ('/home/design?id=' + Id),id: ('design_subMenu_'+Id) },text: Name" ></a> 
+                    </div>
+                </li>
+                <li>
+                    <a href="/home/contact" style="margin-right:0;">
+                        联络知行
+                    </a>
+                </li>
+            </ul> 
+        </div>
+        
+    </div>
+    <div class="zx-body">
+        @RenderBody()
+    </div> 
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/knockoutjs")
+    @Scripts.Render("~/bundles/common") 
+    
     @RenderSection("scripts", required: false)
 </body>
 </html>

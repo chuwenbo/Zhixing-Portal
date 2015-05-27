@@ -1,0 +1,37 @@
+﻿@model string
+@{
+    ViewBag.Title = "Design";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@section scripts{ 
+    <script src="~/Scripts/zhixing/design.js"></script> 
+}
+
+<div class="zx-design" style="width:0px;"> 
+
+    <input type="hidden" value="@ViewBag.CID" id="categoryId" />
+
+    <ul class=" shaibox" style="position: absolute; left: 0px; top: 0px;" data-bind="template:{ name: 'design-template', foreach: ul1 }"></ul>
+
+
+    <ul class="shaiBox" style="position: absolute; left: 301px; top: 0px;" data-bind="template:{ name: 'design-template', foreach: ul2 }"></ul>
+
+
+    <ul class="shaiBox" style="position: absolute; left: 602px; top: 0px;" data-bind="template:{ name: 'design-template', foreach: ul3 }"></ul>
+
+
+    <ul style="margin-right: 0px; position: absolute; left: 903px; top: 0px;" class="shaiBox" data-bind="template:{ name: 'design-template', foreach: ul4 }"></ul> 
+
+</div>
+
+<script type="text/html" id="design-template">
+    <li class="x1" style="padding-top:10px;padding-bottom:10px;">
+        <a href="#" class="border" target="_blank" style="margin-left:11px;"><img data-bind="attr:{src:ImageURL}" width="275"></a>
+        <a href="#" style="text-decoration:none;">
+            <p class="index_list_p3" style="padding-left:11px;padding-right:11px;" data-bind="text: Description">
+
+            </p>
+        </a>
+    </li>
+</script>
