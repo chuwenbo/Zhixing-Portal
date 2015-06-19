@@ -1,0 +1,12 @@
+﻿.dataTables_length {
+    display: none;
+}
+
+tr.details td.details-control {
+    background: url('/image/datatables/details_close.png') no-repeat center center;
+}
+
+td.details-control {
+    background: url('/image/datatables/details_open.png') no-repeat center center;
+    cursor: pointer;
+}
