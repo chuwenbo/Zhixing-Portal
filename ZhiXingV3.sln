@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZhiXingWeb", "ZhiXingWeb\Zh
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZhiXingWeb.Tests", "ZhiXingWeb.Tests\ZhiXingWeb.Tests.csproj", "{4A8AEEC0-4CC3-43C6-95F3-7DF7306DBEB7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ZhiXing.Core", "ZhiXing.Core\ZhiXing.Core.csproj", "{EBE2FBD3-F42F-4FBB-A2DA-67B5FF9FBFD1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{4A8AEEC0-4CC3-43C6-95F3-7DF7306DBEB7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A8AEEC0-4CC3-43C6-95F3-7DF7306DBEB7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A8AEEC0-4CC3-43C6-95F3-7DF7306DBEB7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBE2FBD3-F42F-4FBB-A2DA-67B5FF9FBFD1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBE2FBD3-F42F-4FBB-A2DA-67B5FF9FBFD1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBE2FBD3-F42F-4FBB-A2DA-67B5FF9FBFD1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBE2FBD3-F42F-4FBB-A2DA-67B5FF9FBFD1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

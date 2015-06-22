@@ -1,14 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Web;
 using System.Web.Mvc;
+using ZhiXing.Core.Service;
+using ZhiXing.Core.Utility;
 using ZhiXingWeb.Models;
 
 namespace ZhiXingWeb.Controllers
 {
     public class DataController : Controller
     {
+        IAdminService _adminService;
+
+        public DataController()
+        {
+            _adminService = new AdminService();
+        }
+
         //
         // GET: /Data/
 
@@ -52,17 +62,29 @@ namespace ZhiXingWeb.Controllers
         {
             List<CategoryViewModel> categoryList = new List<CategoryViewModel>();
 
-            categoryList.Add(new CategoryViewModel()
-            {
-                Id = 1,
-                Name = "酒类"
-            });
+            int pageIndex =Converter.ToInt32(Request.Params["start"]);
+            int pageSize = Converter.ToInt32(Request.Params["length"]); 
 
-            categoryList.Add(new CategoryViewModel()
-            {
-                Id = 2,
-                Name = "糖水"
-            });
+             foreach(var item in _adminService.GetCategorys(pageIndex,pageSize))
+             {
+                 categoryList.Add(new CategoryViewModel()
+                 {
+                    Id=item.Id,
+                    Name=item.Name
+                 });
+             }
+
+            //categoryList.Add(new CategoryViewModel()
+            //{
+            //    Id = 1,
+            //    Name = "酒类"
+            //});
+
+            //categoryList.Add(new CategoryViewModel()
+            //{
+            //    Id = 2,
+            //    Name = "糖水"
+            //});
 
             var data = new
             { 
@@ -133,6 +155,26 @@ namespace ZhiXingWeb.Controllers
 
             return Json(data, JsonRequestBehavior.AllowGet);
         } 
+
+        public JsonResult UploadImages()
+        {
+            MessgeResult result = new MessgeResult();
+            result.Success = true;
+            string name = Request.Params["name"];
+
+     
+
+            HttpPostedFileBase uploader = Request.Files["file"];
+
+            string imageFileHash = MD5Provider.GetMD5FromFile(uploader.InputStream);
+
+
+            //string savePath = Server.MapPath("/upload/" + name);
+            //uploader.SaveAs(savePath); 
+
+
+            return Json(result);
+        }
 
         #endregion
     }

@@ -241,6 +241,9 @@
     <Content Include="Scripts\knockout-2.2.0.debug.js" />
     <Content Include="Scripts\knockout-2.2.0.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\plupload\Moxie.swf" />
+    <Content Include="Scripts\plupload\Moxie.xap" />
+    <Content Include="Scripts\plupload\plupload.full.min.js" />
     <Content Include="Scripts\zhixing\common.js" />
     <Content Include="Scripts\zhixing\design.js" />
     <Content Include="Scripts\zhixing\extension.js" />
@@ -265,9 +268,16 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Upload\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ZhiXing.Core\ZhiXing.Core.csproj">
+      <Project>{ebe2fbd3-f42f-4fbb-a2da-67b5ff9fbfd1}</Project>
+      <Name>ZhiXing.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
