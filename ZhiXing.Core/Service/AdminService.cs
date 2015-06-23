@@ -9,14 +9,35 @@ namespace ZhiXing.Core.Service
 {
     public class AdminService : IAdminService
     {
+        ICategoryRepository _categoryRepository;
+
+        public AdminService()
+        {
+            _categoryRepository = new CategoryRepository(); 
+        }
+
         public List<Category> GetCategorys(int pageIndex, int pageSize,string nameFilters = "")
         {
-            List<Category> categorys = new List<Category>(); 
+            List<Category> categorys = new List<Category>();
 
-            ICategoryRepository categoryRepository = new CategoryRepository();
-            categorys = categoryRepository.GetCategorys(pageIndex, pageSize, nameFilters);
+            categorys = _categoryRepository.GetCategorys(pageIndex, pageSize, nameFilters);
 
             return categorys;
+        }
+
+        public bool CreateCategory(string name)
+        {
+            return _categoryRepository.CreateCategory(name);
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            return _categoryRepository.DeleteCategory(id);
+        }
+
+        public bool UpdateCategory(int id,string name)
+        {
+            return _categoryRepository.UpdateCategory(id, name);
         }
     }
 }

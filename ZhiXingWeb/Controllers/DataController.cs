@@ -100,7 +100,7 @@ namespace ZhiXingWeb.Controllers
         public JsonResult UpdateCategory(int id,string name)
         {
             MessgeResult result = new MessgeResult();
-            result.Success = true;
+            result.Success = _adminService.UpdateCategory(id, name);
 
             return Json(result);
         } 
@@ -108,7 +108,7 @@ namespace ZhiXingWeb.Controllers
         public JsonResult DeleteCategory(int id)
         {
             MessgeResult result = new MessgeResult();
-            result.Success = true;
+            result.Success = _adminService.DeleteCategory(id);
 
             return Json(result);
         }
@@ -116,7 +116,7 @@ namespace ZhiXingWeb.Controllers
         public JsonResult CreateCategory(string name)
         {
             MessgeResult result = new MessgeResult();
-            result.Success = true;
+            result.Success = _adminService.CreateCategory(name);
 
             return Json(result);
         }

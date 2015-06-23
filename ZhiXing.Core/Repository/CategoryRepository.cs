@@ -42,5 +42,26 @@ namespace ZhiXing.Core.Repository
 
             return categorys;
         }
+
+        public bool CreateCategory(string name)
+        {
+            string sql = string.Format("insert into Category (Name) values ('{0}')", name);
+
+            return BaseRepository.ExecuteNonQuery(sql) <= 0 ? false : true;
+        }
+
+        public bool DeleteCategory(int id)
+        {
+            string sql = string.Format("delete from Category where Id={0}", id);
+
+            return BaseRepository.ExecuteNonQuery(sql) <= 0 ? false : true;
+        }
+
+        public bool UpdateCategory(int id, string name)
+        {
+            string sql = string.Format("update Category set name='{0}' where Id={1}", name, id);
+
+            return BaseRepository.ExecuteNonQuery(sql) <= 0 ? false : true;
+        }
     }
 }
