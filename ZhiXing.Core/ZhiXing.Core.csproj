@@ -42,6 +42,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Model\Category.cs" />
+    <Compile Include="Model\ImageCategoryList.cs" />
+    <Compile Include="Model\ImageCategoryRel.cs" />
+    <Compile Include="Model\ImageHash.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\BaseRepository.cs" />
     <Compile Include="Repository\CategoryImageRelReporsitory.cs" />

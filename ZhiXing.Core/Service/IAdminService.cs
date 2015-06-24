@@ -12,5 +12,13 @@ namespace ZhiXing.Core.Service
         bool CreateCategory(string name);
         bool DeleteCategory(int id);
         bool UpdateCategory(int id, string name);
+        List<ImageCategoryList> GetImagesList(int pageIndex, int pageSize, out int totalCount, string filters);
+        List<ImageCategoryList> GetDesignWorks(int pageIndex, int pageSize, out int totalCount, string categoryId);
+
+
+        bool ExistImageHash(string hashCode);
+
+        bool UploadImages(string imageHashCode, string url, int categoryId);
+        bool DeleteCategoryImageRel(int id);
     }
 }

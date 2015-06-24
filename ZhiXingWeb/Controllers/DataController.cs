@@ -25,17 +25,15 @@ namespace ZhiXingWeb.Controllers
         public JsonResult GetSubMenu()
         {
             List<CategoryViewModel> categoryList = new List<CategoryViewModel>();
-            
-            categoryList.Add(new CategoryViewModel() {
-                Id=1,
-                Name="酒类"
-            });
 
-            categoryList.Add(new CategoryViewModel()
+            foreach(var item in _adminService.GetCategorys(0,Int32.MaxValue))
             {
-                Id = 2,
-                Name = "糖水"
-            });
+                categoryList.Add(new CategoryViewModel()
+                {
+                    Id = item.Id,
+                    Name = item.Name
+                });
+            } 
 
             return Json(categoryList,JsonRequestBehavior.AllowGet);
         }
@@ -46,14 +44,25 @@ namespace ZhiXingWeb.Controllers
         {
             List<DesignViewModel> viewModelList = new List<DesignViewModel>(); 
 
-            for (int i = 0; i < 10; i++)
+            int totalCount;
+
+            foreach (var item in _adminService.GetDesignWorks(pageIndex - 1, 8, out totalCount, cid))
             {
                 viewModelList.Add(new DesignViewModel()
                 {
-                    ImageURL = "http://www.flamesun.com/upload/20150514/143158729821520.jpg",
-                    Description = @"“筷做菜”为中国传统家常菜量身定制高水准的复合调味料，简化做菜流程，提升三餐质量，倡导人们回归家庭餐桌，并且把回家吃饭变成可轻松实现的生活方式。"
+                    ImageURL = item.URL,
+                    Description = item.Description
                 });
             }
+
+            //for (int i = 0; i < 10; i++)
+            //{
+            //    viewModelList.Add(new DesignViewModel()
+            //    {
+            //        ImageURL = "http://www.flamesun.com/upload/20150514/143158729821520.jpg",
+            //        Description = @"“筷做菜”为中国传统家常菜量身定制高水准的复合调味料，简化做菜流程，提升三餐质量，倡导人们回归家庭餐桌，并且把回家吃饭变成可轻松实现的生活方式。"
+            //    });
+            //}
 
             return Json(viewModelList);
         }
@@ -73,18 +82,6 @@ namespace ZhiXingWeb.Controllers
                     Name=item.Name
                  });
              }
-
-            //categoryList.Add(new CategoryViewModel()
-            //{
-            //    Id = 1,
-            //    Name = "酒类"
-            //});
-
-            //categoryList.Add(new CategoryViewModel()
-            //{
-            //    Id = 2,
-            //    Name = "糖水"
-            //});
 
             var data = new
             { 
@@ -121,60 +118,82 @@ namespace ZhiXingWeb.Controllers
             return Json(result);
         }
 
-        #endregion
+        public JsonResult GetCategoryOptions()
+        {
+            var categorys = _adminService.GetCategorys(0, Int32.MaxValue);
 
+            return Json(categorys, JsonRequestBehavior.AllowGet);
+        }
+
+        #endregion 
 
         #region Image
 
         public JsonResult GetImages()
         {
+            int pageIndex = Converter.ToInt32(Request.Params["start"]);
+            int pageSize = Converter.ToInt32(Request.Params["length"]);
+            int totalCount = 0;
+
             List<ImageViewModel> imangeList = new List<ImageViewModel>();
 
-            imangeList.Add(new ImageViewModel()
+            foreach (var item in _adminService.GetImagesList(pageIndex, pageSize, out totalCount, string.Empty))
             {
-                CategoryName="酒",
-                ImageName = "135503429458951.jpg",
-                ImageURL = "http://i1.hoopchina.com.cn/blogfile/201212/09/135503429458951.jpg"
-
-            });
-
-            imangeList.Add(new ImageViewModel()
-            {
-                CategoryName = "糖水",
-                ImageName = "135503428957435.jpg",
-                ImageURL = "http://i1.hoopchina.com.cn/blogfile/201212/09/135503428957435.jpg"
-            });
+                imangeList.Add(new ImageViewModel()
+                {
+                    Id = item.Id,
+                    CategoryName = item.CategoryName,
+                    ImageName = item.URL.Substring(item.URL.LastIndexOf("/")),
+                    ImageURL = item.URL,
+                    ImageDescription = item.Description
+                });
+            }
 
             var data = new
             {
                 draw = Request.Params["draw"],
-                recordsTotal = 2,
-                recordsFiltered = 2,
+                recordsTotal = totalCount,
+                recordsFiltered = totalCount,
                 data = imangeList
             };
 
             return Json(data, JsonRequestBehavior.AllowGet);
-        } 
+        }
 
         public JsonResult UploadImages()
         {
-            MessgeResult result = new MessgeResult();
-            result.Success = true;
-            string name = Request.Params["name"];
+            MessgeResult result = new MessgeResult(); 
 
-     
+            int category =-1;
+            Int32.TryParse(Request.Params["category"],out category);
+
+            string name = Request.Params["name"]; 
+            string saveName = Guid.NewGuid().ToString() + name.Substring(name.LastIndexOf("."));
+            string relativePath = "/upload/" + saveName;
+            string savePath = Server.MapPath("/upload/" + saveName);
 
             HttpPostedFileBase uploader = Request.Files["file"];
 
-            string imageFileHash = MD5Provider.GetMD5FromFile(uploader.InputStream);
+            string imageFileHash = MD5Provider.GetMD5FromFile(uploader.InputStream); 
 
+            if (!_adminService.ExistImageHash(imageFileHash))
+            {
+                uploader.SaveAs(savePath);
+            }
 
-            //string savePath = Server.MapPath("/upload/" + name);
-            //uploader.SaveAs(savePath); 
-
+           result.Success = _adminService.UploadImages(imageFileHash, relativePath, category);
 
             return Json(result);
         }
+
+        public JsonResult DeleteImageRel(int id)
+        {
+            MessgeResult result = new MessgeResult();
+            result.Success = _adminService.DeleteCategoryImageRel(id);
+
+            return Json(result);
+        }
+
 
         #endregion
     }

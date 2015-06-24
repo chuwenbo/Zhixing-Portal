@@ -17,8 +17,9 @@
         width: 0;
     }
  </style>
-
-
+<div style="margin-bottom:10px;margin-top:10px;padding-left:10px;padding-top:10px;">
+    <h4>图片列表</h4>
+</div>
 <table id="example" class="display" cellspacing="0" width="100%">
     <thead>
         <tr>
@@ -29,13 +30,14 @@
     </thead>
     <tbody></tbody>
 </table>
-<div style="margin-bottom:10px;margin-top:10px;padding-left:10px;padding-top:10px;border-top:2px solid #428bca;">
-    <div>
-        <label>分类</label><select name="upload-category" data-bind="options: categorys, optionsText:'Name', optionsValue:'Id', value: uploadSeletedCategory"></select>
-    </div>
-    <div>
-        <button class="btn btn-default" data-toggle="modal" data-target="#categoryModal" id="loadImage">选择图片(最大2M)</button>
-        <button class="btn btn-default" data-toggle="modal" data-target="#categoryModal" id="start_upload">开始上传</button>
-    </div> 
+<div style="border-top:2px solid #428bca;position:relative;padding-left:10px;">
+    <h4>上传图片</h4> 
+    <span>
+        <button class="btn btn-default" data-target="#categoryModal" id="loadImage">选择图片(最大2M)</button>
+
+        <button class="btn btn-default" data-target="#categoryModal" id="start_upload">开始上传</button>
+
+        <label style="padding-left:10px;padding-right:5px;">上传分类</label><select name="upload-category" data-bind="options: categorys, optionsText:'Name', optionsValue:'Id', value: uploadSeletedCategory"></select>
+    </span> 
 </div> 
 <div id="file-list"></div> 

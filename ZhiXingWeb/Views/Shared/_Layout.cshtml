@@ -47,9 +47,8 @@
     <div class="zx-body">
         @RenderBody()
     </div> 
-
-    @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/knockoutjs")
+    @Scripts.Render("~/bundles/jquery") 
     @Scripts.Render("~/bundles/common") 
     
     @RenderSection("scripts", required: false)

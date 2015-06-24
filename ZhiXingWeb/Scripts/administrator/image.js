@@ -69,9 +69,20 @@ $('#example tbody').on('click', 'tr td.details-control', function () {
 
 function format(d) {
     return '<img style="height:300px;" src="' + d.ImageURL + '"/> ' + ' ' + 
-        '<button onclick="deleteDetal(\'' + d.Id + '\')"> 删除</button>' +
+        '<button onclick="deleteImage(\'' + d.Id + '\')"> 删除</button>' +
         '';
 }
+
+function deleteImage(id) { 
+    $.post("/data/DeleteImageRel", { id: id }, function (data) {
+        if (data.Success) {
+            dt.search('').draw(false);
+        } else {
+            alert(data.Message);
+        }
+    });
+}
+
 
 
 //实例化一个plupload上传对象
@@ -130,10 +141,10 @@ document.getElementById('start_upload').onclick = function () {
     console.log(imageViewModel.uploadSeletedCategory());
 }
 
-$.get("/data/GetCategory", function (result) {
-   // console.log(result.data);
+$.get("/data/GetCategoryOptions", function (result) {
+    console.log(result);
 
-    imageViewModel.categorys(result.data);
+    imageViewModel.categorys(result);
 });
 
 

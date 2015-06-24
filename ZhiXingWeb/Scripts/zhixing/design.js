@@ -1,4 +1,4 @@
-﻿(function () {
+﻿//(function () {
 
     function DesignViewModel() {
         this.ul1 = ko.observableArray([]);
@@ -10,9 +10,11 @@
         this.loading = ko.observable(false);
     };
 
-    var viewModel = new DesignViewModel(); 
+    var designViewModel = new DesignViewModel(); 
 
-    ko.applyBindings(viewModel, $("div.zx-design")[0]);
+    ko.applyBindings(designViewModel, $("div.zx-design")[0]);
+ 
+  //  designViewModel.ul1.push({ ImageURL: "http://www.flamesun.com/upload/20150514/143158729821520.jpg", Description: " 为中国传统家常菜量身定制高水准的复合调味料，简化做菜流程，提升三餐质量，倡导人们回归家庭餐桌，并且把回家吃饭变成可轻松实现的生活方式。" });
 
     loadData(true);
 
@@ -27,7 +29,7 @@
         //when scroll to bottom
         if ((scrollTop + viewHeight) > (pageHeight - 20)) {
             if (scrollTop < 10000) {//keep scroll under control.    
-                if (!viewModel.loading()) {
+                if (!designViewModel.loading()) {
                     loadData(false);
                 } 
             }
@@ -37,28 +39,28 @@
 
     function loadData(pageLoad) {
  
-        viewModel.loading(true);
+        designViewModel.loading(true);
         
         var cid = $("#categoryId").val();
 
-        $.post("/data/GetDesignWorks", { cid: cid, pageIndex: viewModel.pageIndex() }, function (data) {
+        $.post("/data/GetDesignWorks", { cid: cid, pageIndex: designViewModel.pageIndex() }, function (data) {
 
             var j = 1;
 
             $.each(data, function (i, d) {
-
+                console.log(d);
                 switch (j) {
-                    case 1:
-                        viewModel.ul1.push(d);
+                    case 1: 
+                        designViewModel.ul1.push(d);
                         break;
                     case 2:
-                        viewModel.ul2.push(d);
+                        designViewModel.ul2.push(d);
                         break;
                     case 3:
-                        viewModel.ul3.push(d);
+                        designViewModel.ul3.push(d);
                         break;
                     case 4:
-                        viewModel.ul4.push(d);
+                        designViewModel.ul4.push(d);
                         break;
                 }
 
@@ -66,16 +68,16 @@
 
                 if (j > 4) { j = 1; }
             });
-
+            //console.log(designViewModel.ul1());
             if (pageLoad) {
                 // load animate
                 $(".zx-design").animate({ 'width': '1200' });  
             }
 
-            viewModel.pageIndex(viewModel.pageIndex() + 1);
+            designViewModel.pageIndex(designViewModel.pageIndex() + 1);
         }).always(function () {
-            viewModel.loading(false);
+            designViewModel.loading(false);
         });
     };
 
-})(window);
+//})(window);
