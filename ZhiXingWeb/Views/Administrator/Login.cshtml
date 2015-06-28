@@ -1,0 +1,63 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<link href="~/Content/administrator/layout.css" rel="stylesheet" />
+<div class="admin-login">
+    <table>
+        <tbody>
+            <tr>
+                <td>用户名</td> 
+                <td><input type="text" data-bind="value: name" /></td>
+            </tr>
+            <tr>
+                <td>密码</td>
+                <td><input type="password" data-bind="value: password" /></td>
+            </tr>
+            <tr>
+                <td><button data-bind="click: login">登录</button></td>
+                <td><label class="message" data-bind="text: message"></label></td>
+            </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<script src="~/Scripts/knockout-2.2.0.js"></script>
+<script src="~/Scripts/jquery-2.1.4.js"></script>
+<script>
+    var viewModel = {
+        name: ko.observable(),
+        password: ko.observable(),
+        message: ko.observable(),
+        login: function () {
+            var _this = this;
+
+            if ($.trim(this.name()) == "") {
+                this.message("登录名不能为空。");
+                return;
+            }
+
+            if ($.trim(this.password()) == "") {
+                this.message("密码不能为空。");
+                return;
+            }
+
+            $.post("/Administrator/doLogin", {name:this.name(),password:this.password()}, function (result) {
+
+                if (result == false) {
+                    _this.message("用户名或密码不正确，请重新登陆。");
+                } else {
+                    window.location = "/Administrator/index";
+                }
+            });
+        }
+    };
+
+    ko.applyBindings(viewModel); 
+
+    $("input[type='text'],input[type='password']").focus(function () {
+        viewModel.message("");
+    });
+
+</script>

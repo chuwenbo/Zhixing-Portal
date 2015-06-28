@@ -8,10 +8,13 @@
     @Scripts.Render("~/bundles/modernizr")   
 </head>
 <body>
+
+    
     <div class="zx-top">
+        <div class="zx-login"><a href="/Administrator/index" title="登录">登录</a></div>
         <div class="zx-top-logo">
             <a href="index.php">
-                <img src="~/Image/logo.png" alt="知行创意" /> 
+                <img src="~/Image/logo.png" alt="知行创意" style="border:0px;" /> 
             </a>
             
         </div>
@@ -42,7 +45,6 @@
                 </li>
             </ul> 
         </div>
-        
     </div>
     <div class="zx-body">
         @RenderBody()
